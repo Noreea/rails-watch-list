@@ -1,30 +1,39 @@
 class ListsController < ApplicationController
+  before_action :set_list, only: [:show, :destroy]
+
   def index
     @lists = List.all
   end
 
   def show
-    @list = List.find(params[:id])
+    @bookmark = Bookmark.new
   end
 
   def new
     @list = List.new
   end
 
-def create
-  @list = List.new(list_params)
-  respond_to do |format|
+  def create
+    @list = List.new(list_params)
     if @list.save
-      format.html { redirect_to @list, notice: 'La liste a été créée avec succès.' }
+      redirect_to list_path(@list)
     else
-      format.html { render :new, status: :unprocessable_entity }
+      render :new, status: :unprocessable_entity
     end
   end
-end
 
-private
+  def destroy
+    @list.destroy
+    redirect_to lists_path, status: :see_other
+  end
 
-def list_params
-  params.require(:list).permit(:name)
-end
+  private
+
+  def set_list
+    @list = List.find(params[:id])
+  end
+
+  def list_params
+    params.require(:list).permit(:name, :photo)
+  end
 end
