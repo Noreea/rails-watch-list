@@ -1,6 +1,14 @@
-<div class="cover mb-4 d-flex align-items-center justify-content-center">
-  <div class="text-center text-white">
-    <h1>Save any kind of movies</h1>
-    <h3 class="typed-js" data-controller="typed-js"></h3>
-  </div>
+<p style="color: green"><%= notice %></p>
 
+<h1>Lists</h1>
+
+<div id="lists">
+  <% @lists.each do |list| %>
+    <%= render list %>
+    <p>
+      <%= link_to "Show this list", list %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New list", new_list_path %>
