@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  root to: "lists#index"
   resources :bookmarks
   resources :lists
   resources :movies
-  resources :articles
+
   get 'bookmarks/new'
   get 'bookmarks/create'
   get 'bookmarks/destroy'
